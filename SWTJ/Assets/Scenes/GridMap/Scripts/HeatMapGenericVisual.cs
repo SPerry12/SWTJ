@@ -4,9 +4,9 @@ using UnityEngine;
 
 // Gotta be fixed later
 
-public class HeatMapVisual : MonoBehaviour
+public class HeatMapGenericVisual : MonoBehaviour
 {
-   /* private Grid grid;
+    private Grid<HeatMapGridObject> grid;
     private Mesh mesh;
     private bool updateMesh;
 
@@ -14,15 +14,15 @@ public class HeatMapVisual : MonoBehaviour
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
     }
-    */
-    public void SetGrid(Grid grid){
-        /*this.grid = grid; 
+    
+    public void SetGrid(Grid<HeatMapGridObject> grid){
+        this.grid = grid; 
         UpdateHeatMapVisual();
 
-        grid.OnGridValueChanged += Grid_OnGridValueChanged;*/
+        grid.OnGridValueChanged += Grid_OnGridValueChanged;
     }
-    /*
-    private void Grid_OnGridValueChanged(object sender, Grid.OnGridValueChangedEventArgs e){
+    
+    private void Grid_OnGridValueChanged(object sender, Grid<HeatMapGridObject>.OnGridValueChangedEventArgs e){
         //UpdateHeatMapVisual();
         updateMesh = true;
     }
@@ -42,8 +42,8 @@ public class HeatMapVisual : MonoBehaviour
                 int index = x * grid.GetHeight() + y;
                 Vector3 quadSize = new Vector3(1,1) * grid.GetCellSize();
                 
-                int gridValue = grid.GetValue(x, y);
-                float gridValueNormalized = (float)gridValue / Grid.HEAT_MAP_MAX_VALUE;
+                HeatMapGridObject gridObject = grid.GetGridObject(x, y);
+                float gridValueNormalized = gridObject.GetValueNormalized();
                 Vector2 gridValueUV = new Vector2(gridValueNormalized, 0f);
                 MeshUtils.AddToMeshArrays(vertices, uv, triangles, index, grid.GetWorldPosition(x, y) + quadSize * .5f, 0f, quadSize, gridValueUV, gridValueUV);
             }
@@ -52,5 +52,5 @@ public class HeatMapVisual : MonoBehaviour
         mesh.vertices = vertices;
         mesh.uv = uv;
         mesh.triangles = triangles;
-    }*/
+    }
 }
