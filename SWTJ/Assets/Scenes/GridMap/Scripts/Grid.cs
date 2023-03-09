@@ -74,7 +74,7 @@ public class Grid<TGridObject>
 
     // out allows us to return multiple variables from a single function. 
     // function takes a global position and turns it into an x y position
-    private void GetXY(Vector3 worldPosition, out int x, out int y){
+    public void GetXY(Vector3 worldPosition, out int x, out int y){
         x = Mathf.FloorToInt((worldPosition - originPosition).x / cellSize);
         y = Mathf.FloorToInt((worldPosition - originPosition).y / cellSize);
     }
