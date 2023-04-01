@@ -12,6 +12,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Tilemap collisionTilemap;
     private PlayerMovement controls;
 
+    public ShopManagerScript shopManagerScript;
+
+    
     
     private void Awake() {
         controls = new PlayerMovement();
@@ -34,6 +37,13 @@ public class PlayerController : MonoBehaviour
     private void Move(Vector2 direction) {
         if (CanMove(direction)) {
             transform.position += (Vector3)direction;
+
+            shopManagerScript = GameObject.Find("ShopManager").GetComponent<ShopManagerScript>();
+
+            shopManagerScript.shopItems[3,1]--;
+            shopManagerScript.FuelTxt.text = "Fuel: " + shopManagerScript.shopItems[3,1].ToString();
+
+
         }
     }
 

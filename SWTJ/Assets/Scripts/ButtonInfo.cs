@@ -13,8 +13,6 @@ public class ButtonInfo : MonoBehaviour {
 
     public bool isSell;
 
- 
-
     void Update() {
         
         QuantityTxt.text = ShopManager.GetComponent<ShopManagerScript>().shopItems[3,ItemID].ToString();
