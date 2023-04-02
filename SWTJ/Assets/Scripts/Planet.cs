@@ -14,7 +14,9 @@ public class Planet : MonoBehaviour {
 
     public int planetID;
 
-    public int oldPlanetID = 0;
+    public bool justVisited;
+
+    private int oldPlanetID;
 
     private void Awake() {
         Background.SetActive(false);
@@ -23,16 +25,16 @@ public class Planet : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collider) {
         Background.SetActive(true);
         Buy.SetActive(true);
-        Sell.SetActive(true);
-        Debug.Log("This is planet id: " + planetID);
+        Sell.SetActive(true);  
         test();    
-        oldPlanetID = planetID;  
     }
 
     private void OnTriggerExit2D(Collider2D collider) {
         Background.SetActive(false);
         Sell.SetActive(false);
         Buy.SetActive(false);
+
+        justVisited = true;
     }
 
     public int getPlanetBuyPrice(int itemID) {
@@ -43,11 +45,20 @@ public class Planet : MonoBehaviour {
                     case 3: return Random.Range(35, 60);
                     case 4: return Random.Range(55, 75); 
             }
-        }    
+    }
+
+    public int getPlanetSellPrice(int itemID) {
+        switch (itemID) {
+            default:
+                case 1: return Random.Range(1, 14);
+                case 2: return Random.Range(4, 35);
+                case 3: return Random.Range(9, 85);
+                case 4: return Random.Range(14, 115); 
+        }
+    }      
     
     private void test() {
-        if (oldPlanetID != planetID){
-            Debug.Log("Old planet id is not equal to planetID");
+        //if (justVisited == false){
 
             shopManagerScript = GameObject.Find("ShopManager").GetComponent<ShopManagerScript>();
 
@@ -56,9 +67,10 @@ public class Planet : MonoBehaviour {
             shopManagerScript.shopItems[2,3] = Random.Range(35, 60);
             shopManagerScript.shopItems[2,4] = Random.Range(55, 75);
 
-            //oldPlanetID = planetID;
-            Debug.Log("This is old planet after test: " + oldPlanetID);
-        }
-
+            shopManagerScript.shopItems[4,1] = Random.Range(1, 14);
+            shopManagerScript.shopItems[4,2] = Random.Range(4, 35);
+            shopManagerScript.shopItems[4,3] = Random.Range(9, 85);
+            shopManagerScript.shopItems[4,4] = Random.Range(14, 115);
+        //}
     }
 }

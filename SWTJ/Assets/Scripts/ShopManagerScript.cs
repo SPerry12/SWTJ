@@ -36,7 +36,7 @@ public class ShopManagerScript : MonoBehaviour
         shopItems[1,3] = 3;
         shopItems[1,4] = 4;
 
-        //Sell Price
+        //Buy Price
         shopItems[2, 1] =  planet.getPlanetBuyPrice(shopItems[1,1]); 
         shopItems[2, 2] =  planet.getPlanetBuyPrice(shopItems[1,2]);
         shopItems[2, 3] =  planet.getPlanetBuyPrice(shopItems[1,3]);
@@ -48,31 +48,20 @@ public class ShopManagerScript : MonoBehaviour
         shopItems[3, 3] = 0;
         shopItems[3, 4] = 0;
 
-        //Buy Price
-        shopItems[4, 1] = 100;
-        shopItems[4, 2] = 100;
-        shopItems[4, 3] = 100;
-        shopItems[4, 4] = 100; 
-
+        //Sell Price
+        shopItems[4, 1] = planet.getPlanetSellPrice(shopItems[1,1]);
+        shopItems[4, 2] = planet.getPlanetSellPrice(shopItems[1,2]);
+        shopItems[4, 3] = planet.getPlanetSellPrice(shopItems[1,3]);
+        shopItems[4, 4] = planet.getPlanetSellPrice(shopItems[1,4]);
+ 
         FuelTxt.text = "Fuel: " + shopItems[3,1].ToString(); 
     }
-
-    /*public void Update() {
-        Debug.Log("This is planetID " + planet.planetID + " this is old planet " + planet.oldPlanetID);
-        if(planet.planetID != planet.oldPlanetID) {
-            shopItems[2, 1] =  planet.getPlanetBuyPrice(shopItems[1,1]); 
-            shopItems[2, 2] =  planet.getPlanetBuyPrice(shopItems[1,2]);
-            shopItems[2, 3] =  planet.getPlanetBuyPrice(shopItems[1,3]);
-            shopItems[2, 4] =  planet.getPlanetBuyPrice(shopItems[1,4]);
-        }
-    }*/
 
     public void Buy()
     {
         GameObject ButtonRef = GameObject.FindGameObjectWithTag("Event").GetComponent<EventSystem>().currentSelectedGameObject;
         
         if (coins >= shopItems[2, ButtonRef.GetComponent<ButtonInfo>().ItemID]) {
-            //Debug.Log("I am buying");
             coins -= shopItems[2, ButtonRef.GetComponent<ButtonInfo>().ItemID];
             shopItems[3, ButtonRef.GetComponent<ButtonInfo>().ItemID]++;
             CoinstTXT.text = "Coins:" + coins.ToString();
@@ -81,6 +70,7 @@ public class ShopManagerScript : MonoBehaviour
             LuxuryTxt.text = "Luxury: " + shopItems[3,3].ToString();
             GemsTxt.text = "Gems: " + shopItems[3,4].ToString();
             ButtonRef.GetComponent<ButtonInfo>().QuantityTxt.text = shopItems[3, ButtonRef.GetComponent<ButtonInfo>().ItemID].ToString();
+            ButtonRef.GetComponent<AudioSource>().Play();
         }
     }
 
@@ -88,7 +78,6 @@ public class ShopManagerScript : MonoBehaviour
         GameObject ButtonRef = GameObject.FindGameObjectWithTag("Event").GetComponent<EventSystem>().currentSelectedGameObject;
         
         if (shopItems[3, ButtonRef.GetComponent<ButtonInfo>().ItemID] > 0) {
-            Debug.Log("I am selling");
             coins += shopItems[4, ButtonRef.GetComponent<ButtonInfo>().ItemID];
             shopItems[3, ButtonRef.GetComponent<ButtonInfo>().ItemID]--;
             CoinstTXT.text = "Coins:" + coins.ToString();
@@ -97,6 +86,7 @@ public class ShopManagerScript : MonoBehaviour
             LuxuryTxt.text = "Luxury: " + shopItems[3,3].ToString();
             GemsTxt.text = "Gems: " + shopItems[3,4].ToString();
             ButtonRef.GetComponent<ButtonInfo>().QuantityTxt.text = shopItems[3, ButtonRef.GetComponent<ButtonInfo>().ItemID].ToString();
+            ButtonRef.GetComponent<AudioSource>().Play();
         }
     }
 
