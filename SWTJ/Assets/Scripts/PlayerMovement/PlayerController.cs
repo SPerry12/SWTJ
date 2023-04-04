@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
 
     public ShopManagerScript shopManagerScript;
 
+    public Events events;
+
     
     
     private void Awake() {
@@ -43,6 +45,7 @@ public class PlayerController : MonoBehaviour
             shopManagerScript.shopItems[3,1]--;
             shopManagerScript.FuelTxt.text = "Fuel: " + shopManagerScript.shopItems[3,1].ToString();
 
+            events.randomEvent();
 
         }
     }
