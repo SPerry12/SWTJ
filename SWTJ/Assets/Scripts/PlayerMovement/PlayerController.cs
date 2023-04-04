@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
@@ -44,6 +45,10 @@ public class PlayerController : MonoBehaviour
 
             shopManagerScript.shopItems[3,1]--;
             shopManagerScript.FuelTxt.text = "Fuel: " + shopManagerScript.shopItems[3,1].ToString();
+
+            if(shopManagerScript.shopItems[3,1] <= 0) {
+                SceneManager.LoadScene("GameOver");
+            }
 
             events.randomEvent();
 

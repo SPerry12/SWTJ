@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Events : MonoBehaviour
 {
 
     public Player player;
     public void randomEvent() {
-        int randomSeed = Random.Range(1,15);
+        int randomSeed = Random.Range(1,3);
 
         switch(randomSeed){
             default:
@@ -25,5 +26,9 @@ public class Events : MonoBehaviour
     public void lostHealth() {
         player.health--;
         player.setHealth();
+
+        if(player.health <= 0) {
+            SceneManager.LoadScene("GameOver");
+        }
     }
 }
