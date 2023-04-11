@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Tilemap spaceTilemap;
     [SerializeField] private Tilemap collisionTilemap;
+    public GameObject eventCanvas;
     private PlayerMovement controls;
 
     public ShopManagerScript shopManagerScript;
@@ -38,6 +39,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Move(Vector2 direction) {
+
         if (CanMove(direction)) {
             transform.position += (Vector3)direction;
 
@@ -57,7 +59,7 @@ public class PlayerController : MonoBehaviour
 
     private bool CanMove(Vector2 direction) {
         Vector3Int gridPosition = spaceTilemap.WorldToCell(transform.position + (Vector3)direction);
-        if (!spaceTilemap.HasTile(gridPosition) || collisionTilemap.HasTile(gridPosition))
+        if (!spaceTilemap.HasTile(gridPosition) || collisionTilemap.HasTile(gridPosition) || eventCanvas.activeSelf)
             return false;
         return true;
     }
