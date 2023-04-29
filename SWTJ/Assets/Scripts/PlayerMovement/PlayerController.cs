@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     private PlayerMovement controls;
 
     public ShopManagerScript shopManagerScript;
+    public Player player;
 
     public Events events;
 
@@ -34,7 +35,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        // Subscribing to the event
+        // Subscribing to the event (pressing down)
         controls.Main.Movement.performed += ctx => Move(ctx.ReadValue<Vector2>());
     }
 
@@ -46,18 +47,17 @@ public class PlayerController : MonoBehaviour
             shopManagerScript = GameObject.Find("ShopManager").GetComponent<ShopManagerScript>();
 
             shopManagerScript.shopItems[3,1]--;
-            shopManagerScript.FuelTxt.text = "Fuel: " + shopManagerScript.shopItems[3,1].ToString();
+            player.fuelAmount = shopManagerScript.shopItems[3,1];
+            player.setFuelTxt();
+            
 
             if(shopManagerScript.shopItems[3,1] <= 0) {
                 SceneManager.LoadScene("GameOver");
             }
-
-            events.randomEvent();
-
         }
     }
 
-    private bool CanMove(Vector2 direction) {
+    public bool CanMove(Vector2 direction) {
         Vector3Int gridPosition = spaceTilemap.WorldToCell(transform.position + (Vector3)direction);
         if (!spaceTilemap.HasTile(gridPosition) || collisionTilemap.HasTile(gridPosition) || eventCanvas.activeSelf)
             return false;

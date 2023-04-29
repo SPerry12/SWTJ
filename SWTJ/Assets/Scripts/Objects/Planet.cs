@@ -12,29 +12,28 @@ public class Planet : MonoBehaviour {
 
     public ShopManagerScript shopManagerScript;
 
-    public int planetID;
-
-    public bool justVisited;
-
-    private int oldPlanetID;
-
     private void Awake() {
         Background.SetActive(false);
     }
     
     private void OnTriggerEnter2D(Collider2D collider) {
-        Background.SetActive(true);
-        Buy.SetActive(true);
-        Sell.SetActive(true);  
-        test();    
+
+
+        if(collider.gameObject.tag.Equals("Player") == true) {
+            Background.SetActive(true);
+            Buy.SetActive(true);
+            Sell.SetActive(true);  
+            test(); 
+        }
+           
     }
 
     private void OnTriggerExit2D(Collider2D collider) {
-        Background.SetActive(false);
-        Sell.SetActive(false);
-        Buy.SetActive(false);
-
-        justVisited = true;
+        if(collider.gameObject.tag.Equals("Player") == true) {
+            Background.SetActive(false);
+            Sell.SetActive(false);
+            Buy.SetActive(false);
+        }
     }
 
     public int getPlanetBuyPrice(int itemID) {

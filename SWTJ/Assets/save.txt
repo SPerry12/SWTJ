@@ -1,0 +1,1 @@
+{"coinAmount":1200,"fuelAmount":26,"oreAmount":6,"luxuryAmount":6,"gemAmount":6,"playerHealth":13}

@@ -9,6 +9,9 @@ TagManager:
   - BuyEvent
   - SellEvent
   - Test
+  - health
+  - AI
+  - Col
   layers:
   - Default
   - TransparentFX
