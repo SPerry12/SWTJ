@@ -22,10 +22,18 @@ public class Player : MonoBehaviour{
     public TextMeshProUGUI gemTxt;
     public TextMeshProUGUI debtTxt;
     public GameObject player;
+    public GameObject combatVictoryMenu;
 
     public Vector3 playerPosition;
     public ShopManagerScript shopManagerScript;
     public SaveLoad saveLoad;
+
+    public TextMeshProUGUI recoveredHealth;
+    public TextMeshProUGUI recoveredCoins;
+    public TextMeshProUGUI recoveredFuel;
+    public TextMeshProUGUI recoveredOre;
+    public TextMeshProUGUI recoveredLuxury;
+    public TextMeshProUGUI recoveredGem;
 
     
 
@@ -54,7 +62,7 @@ public class Player : MonoBehaviour{
     public void Start() {
         string isLoaded = PlayerPrefs.GetString("isLoaded");
         string battleReturn = PlayerPrefs.GetString("battleResult");
-
+        combatVictoryMenu.SetActive(false);
         if(isLoaded.Equals("true")) {
             saveLoad.Load();
         } else if(battleReturn.Equals("win")) {
@@ -77,7 +85,16 @@ public class Player : MonoBehaviour{
             setGemAmount(PlayerPrefs.GetInt("playerGem") + winGem);
             setDebtAmount(PlayerPrefs.GetInt("playerDebt"));
             
+
+            recoveredHealth.text = "Health: " + winHealth;
+            recoveredFuel.text = "Fuel: " + winFuel;
+            recoveredGem.text = "Gem: " + winGem;
+            recoveredLuxury.text = "Luxury: " + winLuxury;
+            recoveredOre.text = "Ore: " + winOre;
+            recoveredCoins.text = "Coins: " + winCoin;
+
             PlayerPrefs.SetString("battleResult", "null");
+            combatVictoryMenu.SetActive(true);
 
         } else if(battleReturn.Equals("flee")){
             Vector3 newPosition = new Vector3(PlayerPrefs.GetFloat("playerX"), PlayerPrefs.GetFloat("playerY"), 0f);
