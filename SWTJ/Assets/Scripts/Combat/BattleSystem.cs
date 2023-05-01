@@ -114,7 +114,7 @@ public class BattleSystem : MonoBehaviour
             dialogueText.text = "You manage to flee!";
             yield return new WaitForSeconds(1f);
             PlayerPrefs.SetInt("playerHealth", playerUnit.currentHP);
-            PlayerPrefs.SetString("playerFlee", "flee");
+            PlayerPrefs.SetString("battleResult", "flee");
             SceneManager.LoadScene("Main");
         }
 

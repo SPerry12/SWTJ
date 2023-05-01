@@ -62,6 +62,7 @@ public class Player : MonoBehaviour{
     public void Start() {
         string isLoaded = PlayerPrefs.GetString("isLoaded");
         string battleReturn = PlayerPrefs.GetString("battleResult");
+        Debug.Log(battleReturn);
         combatVictoryMenu.SetActive(false);
         if(isLoaded.Equals("true")) {
             saveLoad.Load();
