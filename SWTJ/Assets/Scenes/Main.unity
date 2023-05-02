@@ -7913,6 +7913,7 @@ MonoBehaviour:
   Background: {fileID: 181276194}
   Buy: {fileID: 68098552}
   Sell: {fileID: 235501148}
+  id: 2
   shopManagerScript: {fileID: 933024364}
 --- !u!212 &437935861
 SpriteRenderer:
@@ -9442,6 +9443,7 @@ MonoBehaviour:
   Background: {fileID: 181276194}
   Buy: {fileID: 68098552}
   Sell: {fileID: 235501148}
+  id: 1
   shopManagerScript: {fileID: 933024364}
 --- !u!1 &621380558
 GameObject:
@@ -18000,6 +18002,7 @@ MonoBehaviour:
   Background: {fileID: 181276194}
   Buy: {fileID: 68098552}
   Sell: {fileID: 235501148}
+  id: 3
   shopManagerScript: {fileID: 933024364}
 --- !u!212 &1158883275
 SpriteRenderer:
@@ -21768,6 +21771,7 @@ MonoBehaviour:
   Background: {fileID: 181276194}
   Buy: {fileID: 68098552}
   Sell: {fileID: 235501148}
+  id: 4
   shopManagerScript: {fileID: 933024364}
 --- !u!212 &1718959926
 SpriteRenderer:

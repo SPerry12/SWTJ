@@ -34,7 +34,7 @@ public class ShopManagerScript : MonoBehaviour
         shopItems[2, 2] =  planet.getPlanetBuyPrice(shopItems[1,2]);
         shopItems[2, 3] =  planet.getPlanetBuyPrice(shopItems[1,3]);
         shopItems[2, 4] =  planet.getPlanetBuyPrice(shopItems[1,4]);
-
+        
         //QuantityS
         shopItems[3, 1] = player.fuelAmount;
         shopItems[3, 2] = player.oreAmount;
@@ -46,6 +46,7 @@ public class ShopManagerScript : MonoBehaviour
         shopItems[4, 2] = planet.getPlanetSellPrice(shopItems[1,2]);
         shopItems[4, 3] = planet.getPlanetSellPrice(shopItems[1,3]);
         shopItems[4, 4] = planet.getPlanetSellPrice(shopItems[1,4]);
+
     }
 
     public void Buy()
