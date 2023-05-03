@@ -48,12 +48,34 @@ public class BattleSystem : MonoBehaviour
         PlayerTurn();
     }
 
-    IEnumerator PlayerAttack() {
-
-        bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
-
+    IEnumerator PlayerAttack(int attackValue) {
+        bool isDead = false;
+        if(attackValue == 1){
+            isDead = enemyUnit.TakeDamage(playerUnit.normalDamage);
+            dialogueText.text = "The attack is successful! You did " + playerUnit.normalDamage + " damage!";
+        }
+        else if(attackValue == 2){
+            int randomNum = Random.Range(1,11);
+            if(randomNum > 5) {
+                isDead = enemyUnit.TakeDamage(playerUnit.phaserLaserDamage);
+                dialogueText.text = "The attack is successful! You did " + playerUnit.phaserLaserDamage + " damage!";
+            }
+            else{
+                dialogueText.text = "The attack is unsuccessful!";
+            }
+        }
+        else if(attackValue == 3) {
+            int randomNum = Random.Range(1,11);
+            if(randomNum > 7) {
+                isDead = enemyUnit.TakeDamage(playerUnit.hyperBeamDamage);
+                dialogueText.text = "The attack is successful! You did " + playerUnit.hyperBeamDamage + " damage!";
+            }
+            else{
+                dialogueText.text = "The attack is unsuccessful!";
+            }
+        }
         enemyHUD.healthText.text = "Health: " + enemyUnit.currentHP;
-        dialogueText.text = "The attack is successful!";
+        
 
         yield return new WaitForSeconds(2f);
 
@@ -69,22 +91,36 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator EnemyTurn() {
         dialogueText.text = enemyUnit.unitName + " attacks!";
-
+        
         yield return new WaitForSeconds(1f);
+        
+        int randomNum = Random.Range(1,11);
+        if(randomNum < 9) {
+            bool isDead = playerUnit.TakeDamage(enemyUnit.normalDamage);
 
-        bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
+            playerHUD.healthText.text = "Health: " + playerUnit.currentHP;
+            
 
-        playerHUD.healthText.text = "Health: " + playerUnit.currentHP;
+            if(isDead) {
+                state = BattleState.LOST;
+                StartCoroutine(EndBattle());
+            }
+            dialogueText.text = "The attack is successful! They did " + enemyUnit.normalDamage + " damage to you!";
+            
+            yield return new WaitForSeconds(2f);
+            state = BattleState.PLAYERTURN;
+            PlayerTurn();
 
-        yield return new WaitForSeconds(1f);
-
-        if(isDead) {
-            state = BattleState.LOST;
-            EndBattle();
         } else {
+            dialogueText.text = "The attack is unsuccessful!";
+
+            yield return new WaitForSeconds(2f);
+
             state = BattleState.PLAYERTURN;
             PlayerTurn();
         }
+
+        
     }
 
     IEnumerator EndBattle() {
@@ -131,7 +167,23 @@ public class BattleSystem : MonoBehaviour
             return;
         }
         state = BattleState.ENEMYTURN;
-        StartCoroutine(PlayerAttack());
+       StartCoroutine(PlayerAttack(1));
+    }
+
+    public void OnPhaserLaserButton() {
+        if (state != BattleState.PLAYERTURN) {
+            return;
+        }
+        state = BattleState.ENEMYTURN;
+        StartCoroutine(PlayerAttack(2));
+    }
+
+    public void OnHyperBeamButton() {
+        if (state != BattleState.PLAYERTURN) {
+            return;
+        }
+        state = BattleState.ENEMYTURN;
+        StartCoroutine(PlayerAttack(3));
     }
 
     public void OnFleeButton() {

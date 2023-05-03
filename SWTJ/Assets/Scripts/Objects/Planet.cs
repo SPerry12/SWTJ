@@ -153,30 +153,5 @@ public class Planet : MonoBehaviour {
             shopManagerScript.shopItems[4,2] = getPlanetSellPrice(2);
             shopManagerScript.shopItems[4,3] = getPlanetSellPrice(3);
             shopManagerScript.shopItems[4,4] = getPlanetSellPrice(4);
-
-        /*shopManagerScript.shopItems[4, 1] = getPlanetSellPrice(shopManagerScript.shopItems[1,1]);
-
-        do{
-            shopManagerScript.shopItems[4, 1] = getPlanetSellPrice(shopManagerScript.shopItems[1,1]);
-        }while(shopManagerScript.shopItems[4,1] > shopManagerScript.shopItems[2, 1]);
-
-        shopManagerScript.shopItems[4, 2] = getPlanetSellPrice(shopManagerScript.shopItems[1,2]);
-
-        do{
-            shopManagerScript.shopItems[4, 2] = getPlanetSellPrice(shopManagerScript.shopItems[1,2]);
-        }while(shopManagerScript.shopItems[4,2] > shopManagerScript.shopItems[2, 2]);
-
-        shopManagerScript.shopItems[4, 3] = getPlanetSellPrice(shopManagerScript.shopItems[1,3]);
-
-        do{
-            shopManagerScript.shopItems[4, 3] = getPlanetSellPrice(shopManagerScript.shopItems[1,3]);
-        }while(shopManagerScript.shopItems[4,3] > shopManagerScript.shopItems[2, 3]);
-
-        shopManagerScript.shopItems[4, 4] = getPlanetSellPrice(shopManagerScript.shopItems[1,4]);
-
-        do{
-            shopManagerScript.shopItems[4, 4] = getPlanetSellPrice(shopManagerScript.shopItems[1,4]);
-        }while(shopManagerScript.shopItems[4,4] > shopManagerScript.shopItems[2, 4]);*/
-        
     }
 }

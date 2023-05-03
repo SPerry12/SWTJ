@@ -10,7 +10,6 @@ public class tutorial : MonoBehaviour
         string battleReturn = PlayerPrefs.GetString("battleResult");
         if(battleReturn.Equals("win") || battleReturn.Equals("flee")){
             tutorialX.SetActive(false);
-            Debug.Log(battleReturn);
         }else {
             tutorialX.SetActive(true);
         } 

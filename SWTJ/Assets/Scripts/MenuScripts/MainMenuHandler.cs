@@ -7,7 +7,8 @@ public class MainMenuHandler : MonoBehaviour
 {
  
    public void StartGame() {
-    SceneManager.LoadScene("Main");
+      PlayerPrefs.SetString("isLoaded", "false");
+      SceneManager.LoadScene("Main");
    }
 
    public void loadGame() {

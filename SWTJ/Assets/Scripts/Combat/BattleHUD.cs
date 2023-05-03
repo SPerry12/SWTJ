@@ -23,6 +23,6 @@ public class BattleHUD : MonoBehaviour
     public void SetHUD(EnemyCombat enemyCombat) {
         nameText.text = enemyCombat.unitName;
         healthText.text = "Health: " + enemyCombat.currentHP.ToString();
-        attackText.text = "Attack: " + enemyCombat.damage.ToString();
+        attackText.text = "Attack: " + enemyCombat.normalDamage.ToString();
     }
 }

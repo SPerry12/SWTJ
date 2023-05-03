@@ -1,1 +1,0 @@
-{"coinAmount":100000,"fuelAmount":30,"oreAmount":5,"luxuryAmount":5,"gemAmount":5,"playerHealth":100,"playerDebt":100000,"playerPosition":{"x":-0.5,"y":0.49999988079071047,"z":0.8504137992858887}}

@@ -36,33 +36,29 @@ public class Player : MonoBehaviour{
     public TextMeshProUGUI recoveredGem;
 
     
+    public void Awake(){
+        string battleReturn = PlayerPrefs.GetString("battleResult");
+        if(battleReturn.Equals("win")) {
+            return;
+        } else{
+            setHealth(); 
+            setCoinTxt();
+            setFuelTxt();
+            setOreTxt();
+            setLuxuryTxt();
+            setGemTxt();
+            setDebtTxt();
 
-    private void OnTriggerEnter2D(Collider2D other) {
-        if(other.tag == "health") {
-            int randomSeed = Random.Range(1,5);
-            health += randomSeed;
-            setHealth();
             PlayerPrefs.SetInt("playerHealth", health);
-            GetComponent<AudioSource>().Play();
-        }   
-
-        if(other.tag == "AI") {
-            PlayerPrefs.SetFloat("playerX", player.transform.position.x);
-            PlayerPrefs.SetFloat("playerY", player.transform.position.y);
-            PlayerPrefs.SetInt("playerCoins", coinAmount);
-            PlayerPrefs.SetInt("playerFuel", fuelAmount);
-            PlayerPrefs.SetInt("playerOre", oreAmount);
-            PlayerPrefs.SetInt("playerLuxury", luxuryAmount);
-            PlayerPrefs.SetInt("playerGem", gemAmount);
-            PlayerPrefs.SetInt("playerDebt", debtAmount);
-        }     
+            transform.position = playerPosition;
+        }
+        
     }
-
 
     public void Start() {
         string isLoaded = PlayerPrefs.GetString("isLoaded");
         string battleReturn = PlayerPrefs.GetString("battleResult");
-        Debug.Log(battleReturn);
+
         combatVictoryMenu.SetActive(false);
         if(isLoaded.Equals("true")) {
             saveLoad.Load();
@@ -76,7 +72,7 @@ public class Player : MonoBehaviour{
             int winOre = Random.Range(0,4);
             int winLuxury = Random.Range(0,3);
             int winGem = Random.Range(0,2);
-            int winHealth = Random.Range(1,5);
+            int winHealth = Random.Range(5,10);
 
             setHealthAmount(PlayerPrefs.GetInt("playerHealth") + winHealth);
             setCoinAmount(PlayerPrefs.GetInt("playerCoins") + winCoin);
@@ -109,7 +105,7 @@ public class Player : MonoBehaviour{
             setGemAmount(PlayerPrefs.GetInt("playerGem"));
             setDebtAmount(PlayerPrefs.GetInt("playerDebt"));
         } 
-        else {
+        /*if(isLoaded.Equals("false")) {
             setHealth(); 
             setCoinTxt();
             setFuelTxt();
@@ -120,11 +116,32 @@ public class Player : MonoBehaviour{
 
             PlayerPrefs.SetInt("playerHealth", health);
             transform.position = playerPosition;
-        }
+        }*/
 
         PlayerPrefs.SetString("isLoaded", "false");
 
         
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        if(other.tag == "health") {
+            int randomSeed = Random.Range(1,5);
+            health += randomSeed;
+            setHealth();
+            PlayerPrefs.SetInt("playerHealth", health);
+            GetComponent<AudioSource>().Play();
+        }   
+
+        if(other.tag == "AI") {
+            PlayerPrefs.SetFloat("playerX", player.transform.position.x);
+            PlayerPrefs.SetFloat("playerY", player.transform.position.y);
+            PlayerPrefs.SetInt("playerCoins", coinAmount);
+            PlayerPrefs.SetInt("playerFuel", fuelAmount);
+            PlayerPrefs.SetInt("playerOre", oreAmount);
+            PlayerPrefs.SetInt("playerLuxury", luxuryAmount);
+            PlayerPrefs.SetInt("playerGem", gemAmount);
+            PlayerPrefs.SetInt("playerDebt", debtAmount);
+        }     
     }
 
 

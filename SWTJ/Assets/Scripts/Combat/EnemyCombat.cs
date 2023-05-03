@@ -5,7 +5,9 @@ using UnityEngine;
 public class EnemyCombat : MonoBehaviour
 {
     public string unitName;
-    public int damage;
+    public int normalDamage;
+    public int hyperBeamDamage;
+    public int phaserLaserDamage;
     public int currentHP;
 
     public bool TakeDamage(int dmg) {
